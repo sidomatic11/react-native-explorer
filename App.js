@@ -10,22 +10,32 @@ import {
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-const Stack = createStackNavigator();
+const HomeStack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function HomeScreen({ navigation }) {
 	return (
 		<View style={styles.container}>
-			<Text>Open up App.js to start working on your app!</Text>
-			<Button title="Button" />
-			<TouchableHighlight
+			<Text>Home Screen</Text>
+			{/* <TouchableHighlight
 				underlayColor="#fff"
 				onPress={() => navigation.navigate("Details")}
 			>
 				<View style={styles.button}>
 					<Text style={styles.buttonText}>Go to Details Screen</Text>
 				</View>
-			</TouchableHighlight>
+			</TouchableHighlight> */}
+			<Button
+				title="Go to Details Screen"
+				onPress={() => navigation.navigate("Details")}
+			/>
+			<Button
+				title="Go to Settings"
+				onPress={() => navigation.navigate("Settings")}
+			/>
 			<StatusBar style="auto" />
 		</View>
 	);
@@ -49,13 +59,53 @@ function DetailsScreen({ navigation }) {
 	);
 }
 
+function SettingsScreen({ navigation }) {
+	return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<Text>Settings!</Text>
+			<Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
+		</View>
+	);
+}
+
+function HomeStackScreen() {
+	return (
+		<HomeStack.Navigator>
+			<HomeStack.Screen name="Home" component={HomeScreen} />
+			<HomeStack.Screen name="Details" component={DetailsScreen} />
+		</HomeStack.Navigator>
+	);
+}
+
 export default function App() {
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName="Home">
-				<Stack.Screen name="Home" component={HomeScreen} />
-				<Stack.Screen name="Details" component={DetailsScreen} />
-			</Stack.Navigator>
+			<Tab.Navigator
+				screenOptions={({ route }) => ({
+					tabBarIcon: ({ focused, color, size }) => {
+						let iconName;
+
+						if (route.name === "Home") {
+							iconName = focused
+								? "ios-information-circle"
+								: "ios-information-circle-outline";
+						} else if (route.name === "Settings") {
+							iconName = focused ? "ios-list" : "ios-list-outline";
+						}
+
+						// You can return any component that you like here!
+						return <Ionicons name={iconName} size={size} color={color} />;
+					},
+					tabBarBadge: "o_o",
+				})}
+				tabBarOptions={{
+					activeTintColor: "tomato",
+					inactiveTintColor: "gray",
+				}}
+			>
+				<Tab.Screen name="Home" component={HomeStackScreen} />
+				<Tab.Screen name="Settings" component={SettingsScreen} />
+			</Tab.Navigator>
 		</NavigationContainer>
 	);
 }
