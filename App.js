@@ -6,12 +6,14 @@ import {
 	Text,
 	View,
 	Button,
+	TextInput,
 	TouchableHighlight,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import TodoList from "./components/TodoList";
 
 const HomeStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -81,6 +83,7 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator
+				initialRouteName="Todo"
 				screenOptions={({ route }) => ({
 					tabBarIcon: ({ focused, color, size }) => {
 						let iconName;
@@ -90,13 +93,15 @@ export default function App() {
 								? "ios-information-circle"
 								: "ios-information-circle-outline";
 						} else if (route.name === "Settings") {
+							iconName = focused ? "ios-settings" : "ios-settings-outline";
+						} else if (route.name === "Todo") {
 							iconName = focused ? "ios-list" : "ios-list-outline";
 						}
 
 						// You can return any component that you like here!
 						return <Ionicons name={iconName} size={size} color={color} />;
 					},
-					tabBarBadge: "o_o",
+					// tabBarBadge: "o_o",
 				})}
 				tabBarOptions={{
 					activeTintColor: "tomato",
@@ -104,6 +109,7 @@ export default function App() {
 				}}
 			>
 				<Tab.Screen name="Home" component={HomeStackScreen} />
+				<Tab.Screen name="Todo" component={TodoList} />
 				<Tab.Screen name="Settings" component={SettingsScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
