@@ -231,7 +231,7 @@ export default function PlaygroundScreen() {
 const styles = StyleSheet.create({
   tableRow: {
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFFFF",
   },
   tableCell: {
     flex: 1,
