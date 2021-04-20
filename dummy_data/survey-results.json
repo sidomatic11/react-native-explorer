@@ -1,0 +1,55 @@
+{
+    "surveySummary": {
+        "insufficientIntakeFoodGroups": [
+            {
+                "foodGroup": "Vegetables",
+                "userServing": "Daily: 0-1 servings",
+                "requiredServings": "Daily: 2 or more servings"
+            },
+            {
+                "foodGroup": "Fruits",
+                "userServing": "Daily: 0-2 servings",
+                "requiredServings": "Daily: 3 or more servings"
+            },
+            {
+                "foodGroup": "Olive Oil",
+                "userServing": "Daily: 2-3 tablespoons",
+                "requiredServings": "Daily: 4 or more tablespoons"
+            },
+            {
+                "foodGroup": "Legumes",
+                "userServing": "Weekly: 0-2 servings per week ",
+                "requiredServings": "Weekly: 3 or more servings "
+            }
+        ],
+        "excessiveIntakeFoodGroups": [
+            {
+                "foodGroup": "Red Meat",
+                "userServing": "Weekly: 2-3 servings",
+                "requiredServings": "Weekly: No more than 1 serving"
+            },
+            {
+                "foodGroup": "Sweets",
+                "userServing": "Weekly: 6 or more servings ",
+                "requiredServings": "Weekly: Fewer than 2 servings"
+            }
+        ],
+        "idealIntakeFoodGroups": [
+            {
+                "foodGroup": "Sweet/Carbonated Beverages",
+                "userServing": "Weekly: No more than 1 serving",
+                "requiredServings": "Weekly: No more than 1 serving"
+            },
+            {
+                "foodGroup": "Dairy",
+                "userServing": "Daily: 3 or more servings ",
+                "requiredServings": "Daily: 3 or more servings  "
+            },
+            {
+                "foodGroup": "Nuts",
+                "userServing": "Daily: 3 or more servings ",
+                "requiredServings": "Daily: 3 or more servings  "
+            }
+        ]
+    }
+}
