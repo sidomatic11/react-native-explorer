@@ -13,6 +13,7 @@ import {
 import oSurveyResults from "./../dummy_data/survey-results.json";
 
 function getTableFromData(aTableData, sTableType) {
+  //generate Regular Rows of the table:
   let aTableRows = aTableData.map((oRow, index) => {
     return (
       <View style={styles.tableRow} key={index}>
@@ -78,18 +79,89 @@ function getTableFromData(aTableData, sTableType) {
 }
 
 export default function PlaygroundScreen() {
-  let oIncreaseTable = getTableFromData(
-    oSurveyResults.surveySummary.insufficientIntakeFoodGroups,
-    "increase"
-  );
-  let oDecreaseTable = getTableFromData(
-    oSurveyResults.surveySummary.excessiveIntakeFoodGroups,
-    "decrease"
-  );
-  let oGoodTable = getTableFromData(
-    oSurveyResults.surveySummary.idealIntakeFoodGroups,
-    "good"
-  );
+  let oIncreaseSection,
+    oDecreaseSection,
+    oGoodSection = null;
+
+  let aIncreaseData =
+    oSurveyResults.surveySummary.insufficientIntakeFoodGroups || [];
+  let aDecreaseData =
+    oSurveyResults.surveySummary.excessiveIntakeFoodGroups || [];
+  let aGoodData = oSurveyResults.surveySummary.idealIntakeFoodGroups || [];
+
+  //Show each section only if the data exists —
+
+  if (aIncreaseData.length) {
+    let oIncreaseTable = getTableFromData(aIncreaseData, "increase");
+
+    oIncreaseSection = (
+      <>
+        <View
+          style={{
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+            }}
+          >
+            Increase intake for:
+          </Text>
+        </View>
+
+        {oIncreaseTable}
+      </>
+    );
+  }
+
+  if (aDecreaseData.length) {
+    let oDecreaseTable = getTableFromData(aDecreaseData, "decrease");
+
+    oDecreaseSection = (
+      <>
+        <View
+          style={{
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+            }}
+          >
+            Decrease intake for:
+          </Text>
+        </View>
+
+        {oDecreaseTable}
+      </>
+    );
+  }
+
+  if (aGoodData.length) {
+    let oGoodTable = getTableFromData(aGoodData, "good");
+
+    oGoodSection = (
+      <>
+        <View
+          style={{
+            padding: 20,
+          }}
+        >
+          <Text
+            style={{
+              fontSize: 24,
+            }}
+          >
+            You are doing good with these:
+          </Text>
+        </View>
+
+        {oGoodTable}
+      </>
+    );
+  }
 
   return (
     <SafeAreaView
@@ -152,53 +224,12 @@ export default function PlaygroundScreen() {
         </View>
 
         {/* ----- BODY ----- */}
-        <View
-          style={{
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 24,
-            }}
-          >
-            Increase intake for:
-          </Text>
-        </View>
 
-        {oIncreaseTable}
+        {oIncreaseSection}
 
-        <View
-          style={{
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 24,
-            }}
-          >
-            Decrease intake for:
-          </Text>
-        </View>
+        {oDecreaseSection}
 
-        {oDecreaseTable}
-
-        <View
-          style={{
-            padding: 20,
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 24,
-            }}
-          >
-            You are doing good with these:
-          </Text>
-        </View>
-
-        {oGoodTable}
+        {oGoodSection}
 
         <View
           style={{
